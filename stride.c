@@ -105,7 +105,7 @@ int main(int argc, char **argv) {
 
     int stride_length = 2;
     while (stride_length <= max_index/2) {
-        int PASSES = MAX(1, (double)stride_length / (double)max_index * 100000000);
+        int PASSES = MAX(10000, (double)stride_length / (double)max_index * 100000000);
 	uint64_t sample_count = 0;
         diff = 0ULL;
         int passes = 0;

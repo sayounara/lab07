@@ -52,7 +52,9 @@ uint64_t measure_page_access(int page_stride, int max_index, float *array) {
     uint64_t sample_count = 0;
     diff = 0ULL;
     int passes = 0;
-    const int PASSES = 1000000;
+    const int PASSES = MAX(100000,(int)((uint64_t)100000000 * (uint64_t)page_stride / (uint64_t)max_index));
+
+    // printf ("# stride %d max_index %d passes %d\n", page_stride, max_index, PASSES);
     int stride = getpagesize() / sizeof(float);
     for (; passes < PASSES; passes++) {
         int i = 0;
