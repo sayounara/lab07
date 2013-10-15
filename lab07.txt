@@ -23,7 +23,7 @@ The TLB
 ~~~~~~~
 
 .. figure:: cstlb.pdf
-    :width: 4in
+    :width: 3in
     :alt: 
 
 
@@ -38,7 +38,7 @@ Note that the y axis is the number of CPU cycles required to read the four bytes
 Discuss the following questions:
 
   1. How many TLB entries are there on the computer system from which this graph was produced?
-  2. Are there multiple levels of TLBs?  How do you know one way or the other?
+  2. Are there likely to be multiple levels of TLBs?  Why do or do you not think so?
   3. Assuming that the CPU runs at 3 GHz, about how many nanoseconds is the main memory access time?
 
 
@@ -46,22 +46,18 @@ Full memory hierarchy
 ~~~~~~~~~~~~~~~~~~~~~
 
 .. figure:: csstride.pdf
-    :width: 4in
+    :width: 3in
     :alt: 
 
 This graph was produced by a program (``stride.c``, in the lab github repo) that
 does the following (in pseudocode)::
 
     for an array size in the range 32KB (2^15) to 1GB (2^30), by power of 2:
-
         for stride length from 1 to array size:
-
             measure the average memory access time (in CPU cycles) when 
             "striding" across the array at the given stride length
 
-Note that this graph was produced on the *same* computer system as the first graph.  Any insights gained from analyzing the first plot are applicable to this graph.  The page size for this CPU is 4KB (4096 bytes, or 2^12 bytes).  There are separate curves plotted for each array size.  Each point on each curve corresponds to a different stride length for a given array.
-
-If you think about it, as we vary the array size, we will be varying the number of pages required to hold the array, as well as varying the fraction of the array that can be held in a given cache level (recall from COSC 201 that data are retrieved from memory at the granularity of a cache line, which typically varies from 8 bytes to 128 bytes, or more).  
+Note that this graph was produced on the *same* computer system as the first graph.  Any insights gained from analyzing the first plot are applicable to this graph.  The page size for this CPU is 4KB (4096 bytes, or 2^12 bytes).  There are separate curves plotted for each array size.  Each point on each curve corresponds to a different stride length for a given array.  Note that as we vary the array size we will be varying the number of pages required to hold the array as well as varying the fraction of the array that can be held in a given cache level.
 
 Discuss the following questions:
 
@@ -69,7 +65,7 @@ Discuss the following questions:
   * How large are data caches?  Can you infer that there are multiple levels of data caches?  How can you tell?
   * How many TLB entries do there appear to be?  Are there multiple levels of TLBs?  How can you tell?  Does it match the inferred number from the first graph?
   * Assuming that the CPU runs at 3 GHz, about how many nanoseconds is the main memory access time?
-  * Can you infer anything about the associativity of TLBs or data caches?
+  * Can you conjecture the cause(s) behind the "cascading" pattern on the right half of the figure (i.e., somewhat parallel curves that exhibit negative slope from 400-500 cycles down to about 70 cycles)
 
 .. [#ostep] This lab is based on the homework assignment in <http://pages.cs.wisc.edu/~remzi/OSTEP/vm-tlbs.pdf>.  
 
